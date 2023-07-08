@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:order_carg_app/Constants/colors.dart';
+import 'package:order_carg_app/Screens/help.dart';
+import 'package:order_carg_app/Screens/home.dart';
 import 'package:order_carg_app/Screens/my_orders.dart';
 import 'package:order_carg_app/Screens/place_order.dart';
+import 'package:order_carg_app/Screens/profile.dart';
 import 'package:order_carg_app/Utils/menu_cards.dart';
 
 class MainMenuScreen extends StatefulWidget {
@@ -12,6 +15,20 @@ class MainMenuScreen extends StatefulWidget {
 }
 
 class _MainMenuScreenState extends State<MainMenuScreen> {
+  int _selectedIndex = 0;
+
+  List<Widget> _widgetOptions = [
+    HomeScreen(),
+    ProfileScreen(),
+    HelpScreen(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   areYouSureYoWantToLogOut(BuildContext context) {
     return showDialog(
       context: context,
@@ -49,189 +66,110 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Row(
-      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //     children: [
-      //       Image.asset(
-      //         'assets/images/logo.png', // Replace with your own logo image path
-      //         height: 32,
-      //       ),
-      //       // SizedBox(width: 8),
-      //       Text('MMCL'),
-      //       SizedBox(width: 32),
-      //     ],
+      appBar: AppBar(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(width: 0),
+            SizedBox(width: 0),
+            // SizedBox(width: 32),
+            Text('Mmcl App'),
+            SizedBox(width: 0),
+            SizedBox(width: 0),
+            Image.asset(
+              'assets/images/logo.png', // Replace with your own logo image path
+              height: 32,
+            ),
+          ],
+        ),
+      ),
+
+      drawer: Drawer(
+        backgroundColor: AppColors.appColor,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.white,
+              ),
+              child: Container(
+                height: 200,
+                // color: Colors.blue,
+                child: Center(
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 50,
+                    backgroundImage: AssetImage('assets/images/logo.png'),
+                  ),
+                ),
+              ),
+            ),
+            // ListTile(
+            //   leading: Icon(Icons.home),
+            //   title: Text('Home'),
+            //   onTap: () {
+            //     // Handle drawer item tap for home
+            //   },
+            // ),
+            Card(
+              // color: AppColors.cardColor,
+              color: Colors.transparent,
+              child: ListTile(
+                leading: Icon(Icons.logout),
+                title: Text(
+                  'Logout',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                  areYouSureYoWantToLogOut(context);
+                  // Handle drawer item tap for settings
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+
+      // appBar: PreferredSize(
+      //   preferredSize: Size.fromHeight(150.0), // Set the desired height
+      //   child: AppBar(
+      //     automaticallyImplyLeading: false,
+      //     backgroundColor: Colors.white,
+      // flexibleSpace: Container(
+      //   height: 200,
+      //   // color: Colors.blue,
+      //   child: Center(
+      //     child: CircleAvatar(
+      //       radius: 50,
+      //       backgroundImage: AssetImage('assets/images/profile.png'),
+      //     ),
       //   ),
       // ),
-
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(150.0), // Set the desired height
-        child: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.white,
-          flexibleSpace: Container(
-            height: 200,
-            // color: Colors.blue,
-            child: Center(
-              child: CircleAvatar(
-                radius: 50,
-                backgroundImage: AssetImage('assets/images/profile.png'),
-              ),
-            ),
+      //   ),
+      // ),
+      
+     body: _widgetOptions[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.black,
+        onTap: _onItemTapped,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
-        ),
-      ),
-      body: ListView(
-        children: [
-          // Container(
-          //   height: 200,
-          //   // color: Colors.blue,
-          //   child: Center(
-          //     child: CircleAvatar(
-          //       radius: 50,
-          //       backgroundImage: AssetImage('assets/images/profile.png'),
-          //     ),
-          //   ),
-          // ),
-          SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              'Profile',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
-          SizedBox(height: 10),
-          CardWidget(
-            title: 'Username',
-            description: 'Michael Cyril',
-            icon: Icon(
-              Icons.person,
-              color: AppColors.appColor,
-              size: 15,
-            ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.help),
+            label: 'Help',
           ),
-          CardWidget(
-            title: 'Email',
-            description: 'michaelcyril71@gmail.com',
-            icon: Icon(
-              Icons.email,
-              color: AppColors.appColor,
-              size: 15,
-            ),
-          ),
-          CardWidget(
-            title: 'Phone',
-            description: '+255693331836',
-            icon: Icon(
-              Icons.phone,
-              color: AppColors.appColor,
-              size: 15,
-            ),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      // Handle click on the first card
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => OrdersScreen()),
-                      );
-                    },
-                    child: Card(
-                      color: AppColors.cardColor,
-                      elevation: 2,
-                      child: Container(
-                        height: 100, // Set your desired height here
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.white,
-                              radius: 20,
-                              backgroundImage:
-                                  AssetImage('assets/images/order.png'),
-                            ),
-                            Center(
-                              child: Text('My orders'),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 10), // Add spacing between the cards
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      // Handle click on the second card
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => CartScreen()),
-                      );
-                    },
-                    child: Card(
-                      color: AppColors.cardColor,
-                      elevation: 2,
-                      child: Container(
-                        height: 100, // Set your desired height here
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: Colors.white,
-                              radius: 20,
-                              backgroundImage:
-                                  AssetImage('assets/images/add-product.png'),
-                            ),
-                            Center(
-                              child: Text('New orders'),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 10),
-
-          SizedBox(height: 10),
-          // Add more CardWidgets as needed
         ],
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          height: 50,
-          width: 200,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              primary: AppColors.appColor,
-              shape: RoundedRectangleBorder(
-                borderRadius:
-                    BorderRadius.circular(10.0), // Set the border radius
-              ),
-            ),
-            onPressed: () {
-              // Add your button press logic here
-              // Navigator.pop(context);
-              areYouSureYoWantToLogOut(context);
-            },
-            child: Text(
-              'Log Out',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
       ),
     );
   }

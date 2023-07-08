@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:order_carg_app/Screens/login_screen.dart';
 import 'package:order_carg_app/Screens/menu.dart';
+import 'package:order_carg_app/Screens/profile.dart';
+import 'package:order_carg_app/Screens/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,8 +37,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      // home: const MainMenuScreen(),
-      home: const LoginScreen(),
+      // home: const ProfileScreen(),
+      home: SplashScreen(),
 
     );
   }

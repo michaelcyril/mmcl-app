@@ -29,8 +29,8 @@ class _AddOrderState extends State<AddOrder> {
       // var categoryJson = json.decode(res.body);
 
       List<Category> categoryItemsList = [
-        Category('1', 'Container'),
-        Category('2', 'Car')
+        Category('1', 'Auto Set'),
+        Category('2', 'Container')
       ];
 
       // for (var f in categoryJson) {
@@ -56,8 +56,8 @@ class _AddOrderState extends State<AddOrder> {
       // var cargoTypeJson = json.decode(res.body);
 
       List<CargoType> cargoTypeItemsList = [
-        CargoType('1', 'CargoA'),
-        CargoType('2', 'CargoB')
+        CargoType('1', 'Seat'),
+        CargoType('2', 'Loose Cargo')
       ];
 
       // for (var f in cargoTypeJson) {
@@ -113,9 +113,81 @@ class _AddOrderState extends State<AddOrder> {
         );
       } else {
         print("now submit --------------------------");
-        Navigator.pop(context);
+        // Navigator.pop(context);
+        confirmAddition();
       }
     }
+  }
+
+  confirmAddition() {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Add to booking confirmation.'),
+          content: const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('Cargo Type: Loose Cargo.'),
+              SizedBox(height: 8),
+              Text('Category: Auto Set'),
+              SizedBox(height: 8),
+              // Text('Contents: ${order.contents.join(', ')}'),
+              // SizedBox(height: 8),
+              Text('Price: 35,000/='),
+            ],
+          ),
+          actions: [
+            Row(
+              children: [
+                TextButton(
+                  onPressed: () {
+                    // Navigator.of(context).pop();
+                    // Navigator.of(context).pop();
+                    // ScaffoldMessenger.of(context).showSnackBar(
+                    //   SnackBar(
+                    //     backgroundColor: Colors.blue,
+                    //     content: Text('The payment will be done in cash.'),
+                    //     duration: Duration(seconds: 3), // Optional duration
+                    //   ),
+                    // );
+                    Navigator.pop(context);
+                    // redirectToEmailApp();
+                  },
+                  child: Text('Decline'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    // Navigator.of(context).pop();
+                    // Navigator.of(context).pop();
+                    // ScaffoldMessenger.of(context).showSnackBar(
+                    //   SnackBar(
+                    //     backgroundColor: Colors.blue,
+                    //     content: Text('The payment will be done in cash.'),
+                    //     duration: Duration(seconds: 3), // Optional duration
+                    //   ),
+                    // );
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    // Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: Colors.black,
+                        content: Text('The addition is successful.'),
+                        duration: Duration(seconds: 3), // Optional duration
+                      ),
+                    );
+                    // redirectToEmailApp();
+                  },
+                  child: Text('Confirm'),
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -143,26 +215,26 @@ class _AddOrderState extends State<AddOrder> {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10, bottom: 10),
-                        child: TextFormField(
-                          keyboardType: TextInputType.number,
-                          controller: venueController,
-                          style: const TextStyle(fontSize: 15),
-                          decoration: const InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                              ),
-                              labelText: 'Price to pay'),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter price';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      //   child: TextFormField(
+                      //     keyboardType: TextInputType.number,
+                      //     controller: venueController,
+                      //     style: const TextStyle(fontSize: 15),
+                      //     decoration: const InputDecoration(
+                      //         border: OutlineInputBorder(
+                      //           borderRadius:
+                      //               BorderRadius.all(Radius.circular(12)),
+                      //         ),
+                      //         labelText: 'Price to pay'),
+                      //     validator: (value) {
+                      //       if (value == null || value.isEmpty) {
+                      //         return 'Please enter price';
+                      //       }
+                      //       return null;
+                      //     },
+                      //   ),
+                      // ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10, bottom: 10),
                         child: Container(
@@ -283,7 +355,7 @@ class _AddOrderState extends State<AddOrder> {
                                   pickFile();
                                 },
                                 child: const Text(
-                                  'Pick File',
+                                  '+Cargo Document',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,

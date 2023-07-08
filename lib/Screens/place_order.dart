@@ -5,16 +5,16 @@ import 'package:order_carg_app/Screens/online_payment.dart';
 
 class Order {
   final String productName;
-  final double price;
+  final String price;
 
   Order({required this.productName, required this.price});
 }
 
 class CartScreen extends StatelessWidget {
   final List<Order> orders = [
-    Order(productName: 'Product 1', price: 10.99),
-    Order(productName: 'Product 2', price: 19.99),
-    Order(productName: 'Product 3', price: 7.99),
+    Order(productName: 'Product 1', price: "10,000/="),
+    Order(productName: 'Product 2', price: "10,000/="),
+    Order(productName: 'Product 3', price: "5,000/="),
   ];
 
   selectPaymentMethod(BuildContext context) {
@@ -50,7 +50,7 @@ class CartScreen extends StatelessWidget {
                         selectedCashDialog(context);
                       },
                       child: const Text(
-                        'CASH',
+                        'CONTROL NUMBER',
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -108,7 +108,7 @@ class CartScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Cash Payment Information'),
+          title: Text('Control Number Payment Information'),
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -119,8 +119,12 @@ class CartScreen extends StatelessWidget {
               // SizedBox(height: 8),
               Text('Price: 25,000/='),
               SizedBox(height: 8),
+              // Text('Contents: ${order.contents.join(', ')}'),
+              // SizedBox(height: 8),
+              Text('Control Number: 99900282828'),
+              SizedBox(height: 8),
               Text(
-                  'Here you need to confirm the payment will  be done via cash.'),
+                  'Here you need to confirm the payment will  be done via control number.'),
             ],
           ),
           actions: [
@@ -131,7 +135,7 @@ class CartScreen extends StatelessWidget {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     backgroundColor:  Colors.black,
-                    content: Text('The payment will be done in cash.', style: TextStyle(color: Colors.white),),
+                    content: Text('The payment will be done using control number.', style: TextStyle(color: Colors.white),),
                     duration: Duration(seconds: 3), // Optional duration
                   ),
                 );
@@ -148,7 +152,7 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cart'),
+        title: Text('Booking'),
       ),
       body: ListView.builder(
         itemCount: orders.length,
@@ -159,8 +163,8 @@ class CartScreen extends StatelessWidget {
             elevation: 2,
             child: ListTile(
               title: Text(order.productName),
-              subtitle: Text('\$${order.price.toStringAsFixed(2)}'),
-              trailing: Text('Quantity: 2'),
+              subtitle: Text('${order.price}'),
+              trailing: Text('Quantity: 1'),
             ),
           );
         },
@@ -186,7 +190,7 @@ class CartScreen extends StatelessWidget {
                   // pickFile();
                 },
                 child: const Text(
-                  'Add to cart',
+                  'Add to Booking',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -212,7 +216,7 @@ class CartScreen extends StatelessWidget {
                   selectPaymentMethod(context);
                 },
                 child: const Text(
-                  'Make payment',
+                  'Total: 25,000/= \n Submit Order',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -223,6 +227,9 @@ class CartScreen extends StatelessWidget {
           ],
         ),
       ),
+
+      
     );
+    
   }
 }

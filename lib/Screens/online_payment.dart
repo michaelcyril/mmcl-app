@@ -20,13 +20,13 @@ class _OnlinePaymentScreenState extends State<OnlinePaymentScreen> {
       // if (selectedFile == null ||
       //     selectedCargoTypeId == null ||
       //     selectedCategoryId == null) {
-      //   ScaffoldMessenger.of(context).showSnackBar(
-      //     SnackBar(
-      //       backgroundColor: Colors.blue,
-      //       content: Text('Fill all the inputs.'),
-      //       duration: Duration(seconds: 3), // Optional duration
-      //     ),
-      //   );
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //   SnackBar(
+        //     backgroundColor: Colors.blue,
+        //     content: Text('Fill all the inputs.'),
+        //     duration: Duration(seconds: 3), // Optional duration
+        //   ),
+        // );
       // } else {
       //   print("now submit --------------------------");
       //   Navigator.pop(context);
@@ -116,7 +116,7 @@ class _OnlinePaymentScreenState extends State<OnlinePaymentScreen> {
                     elevation: 2,
                     child: ListTile(
                       title: Text('Amount to be paid'),
-                      subtitle: Text("23,000/="),
+                      subtitle: Text("25,000/="),
                     ),
                   ),
                   Padding(

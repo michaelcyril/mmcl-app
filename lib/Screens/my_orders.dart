@@ -5,7 +5,7 @@ import 'package:order_carg_app/Screens/single_selected_order.dart';
 class Order {
   final String id;
   final List<String> contents;
-  final double price;
+  final String price;
   final String status;
 
   Order({required this.id, required this.contents, required this.price, required this.status});
@@ -16,20 +16,20 @@ class OrdersScreen extends StatelessWidget {
     Order(
       id: '001',
       contents: ['Product 1', 'Product 2'],
-      price: 29.99,
-      status: 'Processing',
+      price: "35,000/=",
+      status: 'Pending',
     ),
     Order(
       id: '002',
       contents: ['Product 3'],
-      price: 12.99,
-      status: 'Delivered',
+      price: "45,000/=",
+      status: 'Approved',
     ),
     Order(
       id: '003',
       contents: ['Product 4', 'Product 5', 'Product 6'],
-      price: 45.99,
-      status: 'Shipped',
+      price: "15,000/=",
+      status: 'Rejected',
     ),
   ];
 
@@ -37,7 +37,7 @@ class OrdersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Orders'),
+        title: Text('My Booking'),
       ),
       body: ListView.builder(
         itemCount: orders.length,
@@ -48,7 +48,7 @@ class OrdersScreen extends StatelessWidget {
             child: ListTile(
               title: Text('Order ID: ${order.id}'),
               subtitle: Text('Status: ${order.status}'),
-              trailing: Text('\$${order.price.toStringAsFixed(2)}'),
+              trailing: Text('${order.price}'),
               onTap: () {
                 // showDialog(
                 //   context: context,
@@ -88,6 +88,7 @@ class OrdersScreen extends StatelessWidget {
           );
         },
       ),
-    );
+
+);
   }
 }

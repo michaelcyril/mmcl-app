@@ -56,17 +56,17 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               Text('Here you need to contact admin in order to be registered.'),
               SizedBox(height: 8),
-              Text('Phone: +255693331836'),
+              Text('Phone: +255774350001'),
               SizedBox(height: 8),
               // Text('Contents: ${order.contents.join(', ')}'),
               // SizedBox(height: 8),
-              Text('Email: info.mmcl@gmail.com'),
+              Text('Email: info@mmcl.co.tz'),
             ],
           ),
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                // Navigator.of(context).pop();
                 // Navigator.of(context).pop();
                 // ScaffoldMessenger.of(context).showSnackBar(
                 //   SnackBar(
@@ -75,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 //     duration: Duration(seconds: 3), // Optional duration
                 //   ),
                 // );
-
+                Navigator.pop(context);
                 redirectToEmailApp();
               },
               child: Text('Contact Admin'),
@@ -87,9 +87,10 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void redirectToEmailApp() async {
-    String email = Uri.encodeComponent("info.mmcl@gmail.com");
+    String email = Uri.encodeComponent("info@mmcl.co.tz");
     String subject = Uri.encodeComponent("Request for registration");
-    String body = Uri.encodeComponent("Hi! I'm the client who request for the registration. \n Contact me when you get this email.");
+    String body = Uri.encodeComponent(
+        "Hi! I'm the client who request for the registration. \n Contact me when you get this email.");
     print(subject); //output: Hello%20Flutter
     Uri mail = Uri.parse("mailto:$email?subject=$subject&body=$body");
     if (await launchUrl(mail)) {
